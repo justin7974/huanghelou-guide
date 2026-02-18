@@ -6,13 +6,15 @@
 <title>黄鹤楼亲子导游 🏯</title>
 <style>
   :root {
-    --bg: #faf9f6;
+    --bg: #f5f0e8;
     --card: #ffffff;
     --accent: #b8860b;
+    --accent-dark: #8b6508;
     --accent-light: #f5e6c8;
     --text: #2c2c2c;
-    --text-light: #666;
+    --text-light: #777;
     --border: #e8e0d0;
+    --green: #4caf50;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -20,186 +22,242 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.8;
-    padding-bottom: 80px;
+    -webkit-font-smoothing: antialiased;
   }
+
+  /* Hero */
   .hero {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     color: white;
     text-align: center;
-    padding: 60px 20px 50px;
+    padding: 56px 20px 48px;
     position: relative;
-    overflow: hidden;
   }
-  .hero::before {
+  .hero::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><text y="50" font-size="80">🏯</text></svg>') center/200px repeat;
+    bottom: -20px;
+    left: 0; right: 0;
+    height: 40px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   }
-  .hero h1 {
-    font-size: 2.2em;
-    font-weight: 700;
-    margin-bottom: 8px;
-    position: relative;
-  }
-  .hero .subtitle {
-    font-size: 1.1em;
-    opacity: 0.85;
-    position: relative;
-  }
-  .hero .meta {
-    margin-top: 20px;
-    font-size: 0.9em;
-    opacity: 0.7;
-    position: relative;
-  }
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
+  .hero h1 { font-size: 2em; font-weight: 700; margin-bottom: 6px; }
+  .hero .subtitle { font-size: 1.05em; opacity: 0.85; }
+  .hero .meta { margin-top: 16px; font-size: 0.85em; opacity: 0.6; }
+
+  /* Container */
+  .container { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+
+  /* Info bar */
   .info-bar {
-    background: var(--accent-light);
+    background: white;
     border-left: 4px solid var(--accent);
-    padding: 16px 20px;
-    margin: 24px auto;
-    max-width: 720px;
-    border-radius: 0 8px 8px 0;
-    font-size: 0.95em;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 14px 18px;
+    margin: 8px 0 20px;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.9em;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
   }
-  .info-bar strong { color: var(--accent); }
-  .route-map {
-    text-align: center;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 720px;
-  }
-  .route-map .dots {
+  .info-bar strong { color: var(--accent-dark); }
+
+  /* Route pills */
+  .route {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     gap: 4px;
-    font-size: 0.85em;
-    color: var(--text-light);
+    padding: 12px 0 20px;
+    font-size: 0.78em;
   }
-  .route-map .dot {
+  .route .pill {
     background: var(--accent);
     color: white;
-    padding: 4px 10px;
+    padding: 3px 9px;
     border-radius: 20px;
-    font-size: 0.8em;
     white-space: nowrap;
   }
-  .route-map .arrow { color: var(--accent); font-weight: bold; }
+  .route .arr { color: var(--accent); font-weight: bold; }
 
+  /* Part card */
   .part {
     background: var(--card);
-    border-radius: 12px;
-    margin: 24px auto;
-    max-width: 720px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-radius: 16px;
+    margin: 20px 0;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
     overflow: hidden;
     border: 1px solid var(--border);
   }
-  .part-header {
-    background: linear-gradient(135deg, var(--accent), #996515);
-    color: white;
-    padding: 16px 24px;
+
+  /* Scene image */
+  .scene-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, #e8dcc8, #d4c4a8);
+  }
+  .scene-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    background: linear-gradient(135deg, #e8dcc8 0%, #d4c4a8 100%);
+    color: var(--accent);
+    position: relative;
+  }
+  .scene-placeholder .label {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 0.3em;
+    color: var(--text-light);
+    opacity: 0.6;
+  }
+
+  /* Part info strip */
+  .part-strip {
+    padding: 14px 18px;
     display: flex;
     align-items: center;
     gap: 12px;
+    border-bottom: 1px solid #f0ebe0;
   }
   .part-num {
-    background: rgba(255,255,255,0.25);
+    background: var(--accent);
+    color: white;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: 32px; height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 1.1em;
+    font-size: 0.95em;
     flex-shrink: 0;
   }
-  .part-header h2 {
-    font-size: 1.15em;
-    font-weight: 600;
-  }
-  .part-header .location {
-    font-size: 0.85em;
-    opacity: 0.85;
-  }
-  .part-body {
-    padding: 24px;
-  }
-  .part-body p {
-    margin-bottom: 16px;
-    text-align: justify;
-  }
-  .part-body .highlight {
-    background: var(--accent-light);
-    border-left: 3px solid var(--accent);
-    padding: 12px 16px;
-    margin: 16px 0;
-    border-radius: 0 6px 6px 0;
-    font-size: 0.95em;
-  }
-  .part-body .poem {
-    background: #f8f6f0;
-    border: 1px solid var(--border);
-    padding: 16px 20px;
-    margin: 16px 0;
-    border-radius: 8px;
-    text-align: center;
+  .part-info h2 {
     font-size: 1.05em;
-    line-height: 2.2;
-    font-family: "Songti SC", "STSong", serif;
+    font-weight: 600;
+    line-height: 1.4;
   }
-  .part-body .interact {
-    background: #e8f5e9;
-    border-left: 3px solid #4caf50;
-    padding: 10px 16px;
-    margin: 16px 0;
-    border-radius: 0 6px 6px 0;
-    font-size: 0.9em;
+  .part-info .loc {
+    font-size: 0.82em;
+    color: var(--text-light);
   }
-  .part-body .interact::before {
-    content: '🎮 ';
-  }
-  .audio-player {
-    padding: 16px 24px;
-    background: #f9f7f3;
-    border-top: 1px solid var(--border);
+
+  /* Audio player */
+  .audio-bar {
+    padding: 12px 18px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    background: #faf7f0;
   }
-  .audio-player .play-label {
-    font-size: 0.85em;
+  .audio-bar .label {
+    font-size: 0.82em;
     color: var(--accent);
     font-weight: 600;
     white-space: nowrap;
   }
-  .audio-player audio {
+  .audio-bar audio {
     width: 100%;
-    height: 40px;
+    height: 36px;
+    border-radius: 8px;
   }
 
+  /* Collapsible text */
+  .text-toggle {
+    width: 100%;
+    padding: 10px 18px;
+    background: none;
+    border: none;
+    border-top: 1px solid #f0ebe0;
+    cursor: pointer;
+    font-size: 0.85em;
+    color: var(--accent);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: inherit;
+    transition: background 0.2s;
+  }
+  .text-toggle:hover { background: #faf7f0; }
+  .text-toggle .chevron {
+    transition: transform 0.3s;
+    display: inline-block;
+  }
+  .text-toggle.open .chevron { transform: rotate(180deg); }
+
+  .text-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .text-content.open { max-height: 2000px; }
+  .text-inner {
+    padding: 0 18px 18px;
+    font-size: 0.92em;
+    line-height: 1.9;
+  }
+  .text-inner p { margin-bottom: 14px; }
+
+  .hl {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.95em;
+  }
+  .poem {
+    background: #f8f6f0;
+    border: 1px solid var(--border);
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.02em;
+    line-height: 2.2;
+    font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+  }
+  .game {
+    background: #e8f5e9;
+    border-left: 3px solid var(--green);
+    padding: 8px 14px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.88em;
+  }
+  .game::before { content: '🎮 '; }
+
+  /* Footer */
   .footer {
     text-align: center;
-    padding: 40px 20px;
+    padding: 36px 20px 60px;
     color: var(--text-light);
-    font-size: 0.9em;
+    font-size: 0.85em;
   }
-  .footer .shrimp { font-size: 2em; margin-bottom: 8px; }
+  .footer .big { font-size: 2.2em; margin-bottom: 6px; }
+
+  /* Tip bar */
+  .tip {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 14px 18px;
+    margin: 20px 0;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.9em;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
 
   @media (max-width: 480px) {
-    .hero h1 { font-size: 1.7em; }
-    .part-body { padding: 18px; }
-    .route-map .dots { font-size: 0.75em; }
+    .hero h1 { font-size: 1.6em; }
+    .part-info h2 { font-size: 0.98em; }
   }
 </style>
 </head>
@@ -214,232 +272,267 @@
 <div class="container">
   <div class="info-bar">
     <strong>📍 实用信息</strong><br>
-    门票：成人 70 元 / 儿童半价 35 元（1.2m-1.5m）<br>
+    门票：成人 70 元 / 儿童半价 35 元<br>
     开放：8:30 - 17:00（冬季）<br>
-    路线：<strong>西门进 → 东门出</strong>，约 2-2.5 小时<br>
-    建议：带水、穿舒适的鞋子，五楼风大注意保暖
+    路线：<strong>西门进 → 东门出</strong>，约 2-2.5 小时
   </div>
 
-  <div class="route-map">
-    <div class="dots">
-      <span class="dot">西门</span><span class="arrow">→</span>
-      <span class="dot">胜象宝塔</span><span class="arrow">→</span>
-      <span class="dot">大牌坊</span><span class="arrow">→</span>
-      <span class="dot">铜雕</span><span class="arrow">→</span>
-      <span class="dot">主楼1-5层</span><span class="arrow">→</span>
-      <span class="dot">千禧钟</span><span class="arrow">→</span>
-      <span class="dot">搁笔亭</span><span class="arrow">→</span>
-      <span class="dot">词亭</span><span class="arrow">→</span>
-      <span class="dot">鹅碑亭</span><span class="arrow">→</span>
-      <span class="dot">东门</span>
-    </div>
+  <div class="route">
+    <span class="pill">西门</span><span class="arr">→</span>
+    <span class="pill">宝塔</span><span class="arr">→</span>
+    <span class="pill">牌坊</span><span class="arr">→</span>
+    <span class="pill">主楼</span><span class="arr">→</span>
+    <span class="pill">登顶</span><span class="arr">→</span>
+    <span class="pill">千禧钟</span><span class="arr">→</span>
+    <span class="pill">搁笔亭</span><span class="arr">→</span>
+    <span class="pill">鹅碑亭</span><span class="arr">→</span>
+    <span class="pill">东门</span>
   </div>
-</div>
 
-<!-- Part 1 -->
-<div class="part" id="part1">
-  <div class="part-header">
-    <div class="part-num">1</div>
-    <div>
-      <h2>欢迎来到黄鹤楼！</h2>
-      <div class="location">📍 西门入口 · 胜象宝塔</div>
+  <!-- Part 1 -->
+  <div class="part" id="p1">
+    <div class="scene-placeholder">🏯<span class="label">西门 · 胜象宝塔</span></div>
+    <div class="part-strip">
+      <div class="part-num">1</div>
+      <div class="part-info">
+        <h2>欢迎来到黄鹤楼！</h2>
+        <div class="loc">📍 西门入口 · 胜象宝塔</div>
+      </div>
+    </div>
+    <div class="audio-bar">
+      <span class="label">🔊 语音</span>
+      <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995df53f05df2cae6ee11a4.mp3"></audio>
+    </div>
+    <button class="text-toggle" onclick="toggle(this)">
+      📖 展开讲解 <span class="chevron">▼</span>
+    </button>
+    <div class="text-content">
+      <div class="text-inner">
+        <p>嗨 Ethan！我们现在站在的这座山叫<strong>蛇山</strong>，对面江那边还有一座<strong>龟山</strong>。蛇和龟，是不是听起来就像一个神话故事的开头？</p>
+        <p>旁边这座白色的小塔叫"<strong>胜象宝塔</strong>"，已经有六百多年的历史了，是元朝的时候建的。</p>
+        <p>黄鹤楼为什么叫"黄鹤楼"呢？</p>
+        <div class="hl">
+          很久以前，一个姓辛的老爷爷开了一家小酒馆。有个穿得破破烂烂的老人每天来喝酒，辛爷爷从来不收他的钱，这样过了半年。老人用<strong>橘子皮</strong>在墙上画了一只鹤，说："拍拍手，鹤就会飞下来跳舞！"果然如此，酒馆因此生意火爆。十年后老人回来，吹了一曲笛子，骑着鹤飞走了。辛爷爷建楼纪念，因为鹤是黄色的——所以叫<strong>黄鹤楼</strong>！
+        </div>
+        <div class="game">是不是有点像哈利波特里面的魔法？墙上的画能动起来！</div>
+      </div>
     </div>
   </div>
-  <div class="part-body">
-    <p>嗨 Ethan！欢迎来到黄鹤楼！你看，我们现在站在的这座山叫<strong>蛇山</strong>，对面江那边还有一座<strong>龟山</strong>。蛇和龟，是不是听起来就像一个神话故事的开头？</p>
-    <p>在我们正式进去之前，先看看旁边这座白色的小塔——这叫"<strong>胜象宝塔</strong>"，已经有六百多年的历史了，是元朝的时候建的，比黄鹤楼现在这栋楼老多了。</p>
-    <p>好，那黄鹤楼为什么叫"黄鹤楼"呢？我给你讲一个特别酷的故事：</p>
-    <div class="highlight">
-      很久很久以前，这个地方有一个姓辛的老爷爷开了一家小酒馆。有一天，来了一个穿得破破烂烂的老人，说"能给我一杯酒喝吗？"辛爷爷人很好，二话不说就给他倒了一大杯酒。这个老人每天都来喝酒，辛爷爷从来不收他的钱，这样过了半年！
-    </div>
-    <p>有一天，这个老人说："我欠了你好多酒钱，还不起，但我可以帮你一个忙。"他从篮子里拿出一片<strong>橘子皮</strong>，在酒馆的墙上画了一只鹤。然后他说："以后有客人来，你只要拍拍手，这只鹤就会从墙上飞下来跳舞！"</p>
-    <p>你猜怎么着？真的！每次有客人来，辛爷爷一拍手，墙上的鹤就活过来了，翩翩起舞。消息传出去以后，全城的人都跑来看跳舞的鹤，酒馆生意好到爆炸，辛爷爷发了大财。</p>
-    <p><strong>十年后</strong>，那个神秘老人又回来了。他掏出一支笛子吹了几声，天上飘来一朵白云，墙上的鹤也飞了下来。老人跳上鹤背，骑着鹤飞走了，再也没有回来。辛爷爷为了纪念他，就在这个地方建了一座楼。因为橘子皮画的鹤是<strong>黄色</strong>的，所以这座楼就叫——<strong>黄鹤楼</strong>！</p>
-    <div class="interact">Ethan 互动：是不是有点像哈利波特里面的魔法？墙上的画能动起来！霍格沃茨的画像也会说话会动呢！</div>
-  </div>
-  <div class="audio-player">
-    <span class="play-label">🔊 语音讲解</span>
-    <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995df53f05df2cae6ee11a4.mp3"></audio>
-  </div>
-</div>
 
-<!-- Part 2 -->
-<div class="part" id="part2">
-  <div class="part-header">
-    <div class="part-num">2</div>
-    <div>
-      <h2>天下江山第一楼</h2>
-      <div class="location">📍 三楚一楼牌坊 · 黄鹤归来铜雕</div>
+  <!-- Part 2 -->
+  <div class="part" id="p2">
+    <div class="scene-placeholder">🏛️<span class="label">三楚一楼牌坊</span></div>
+    <div class="part-strip">
+      <div class="part-num">2</div>
+      <div class="part-info">
+        <h2>天下江山第一楼</h2>
+        <div class="loc">📍 三楚一楼牌坊 · 黄鹤归来铜雕</div>
+      </div>
+    </div>
+    <div class="audio-bar">
+      <span class="label">🔊 语音</span>
+      <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995df5435a78992d8a4bfae.mp3"></audio>
+    </div>
+    <button class="text-toggle" onclick="toggle(this)">
+      📖 展开讲解 <span class="chevron">▼</span>
+    </button>
+    <div class="text-content">
+      <div class="text-inner">
+        <p>"<strong>三楚一楼</strong>"——三楚是古代对湖北湖南这一带的叫法，一楼就是最厉害的楼。黄鹤楼与江西滕王阁、湖南岳阳楼并称"<strong>江南三大名楼</strong>"，古代的超级网红打卡点！</p>
+        <p>前面的大铜雕是"<strong>黄鹤归来</strong>"——传说中飞走的黄鹤终于回来了。</p>
+        <div class="hl">
+          黄鹤楼始建于三国时期，<strong>1800 多年</strong>历史。但被毁掉又重建了<strong>十几次</strong>！1884 年一场大火烧光，之后 100 年没有黄鹤楼。1985 年才重建。我们看到的是"新楼"，但故事有 1800 年那么长。
+        </div>
+        <div class="game">找到黄鹤归来铜雕，和黄鹤合个影吧！</div>
+      </div>
     </div>
   </div>
-  <div class="part-body">
-    <p>Ethan 你看前面这个大牌坊，上面写着"<strong>三楚一楼</strong>"四个大字。"三楚"是古代对湖北湖南这一带的叫法，"一楼"就是说这是这片土地上最厉害的一座楼。</p>
-    <p>黄鹤楼跟江西的滕王阁、湖南的岳阳楼并称"<strong>江南三大名楼</strong>"。它们就像是古代中国的三个超级网红打卡点，每个大诗人路过都必须上去写一首诗。</p>
-    <p>再往前走，看到那个大铜雕了吗？一只巨大的黄鹤展开翅膀，正在降落。这就是"<strong>黄鹤归来</strong>"——传说中那只飞走的黄鹤，终于回来了！</p>
-    <div class="highlight">
-      黄鹤楼从三国时期开始建，到现在已经有 <strong>1800 多年</strong>的历史了。但是它命特别"坎坷"——历史上被毁掉又重建了<strong>十几次</strong>！最惨的一次是 1884 年，清朝光绪年间的一场大火把它烧得干干净净。之后整整 100 年，这里都没有黄鹤楼。直到 1985 年，它才重新建起来。
-    </div>
-    <p>所以我们今天看到的这座黄鹤楼，其实是一座"新楼"，但它承载的故事，有 1800 年那么长。</p>
-    <div class="interact">找到黄鹤归来铜雕，和黄鹤合个影吧！</div>
-  </div>
-  <div class="audio-player">
-    <span class="play-label">🔊 语音讲解</span>
-    <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995df5435a78992d8a4bfae.mp3"></audio>
-  </div>
-</div>
 
-<!-- Part 3 -->
-<div class="part" id="part3">
-  <div class="part-header">
-    <div class="part-num">3</div>
-    <div>
-      <h2>走进黄鹤楼</h2>
-      <div class="location">📍 主楼一层 · 二层</div>
+  <!-- Part 3 -->
+  <div class="part" id="p3">
+    <div class="scene-placeholder">🎨<span class="label">主楼一层 · 二层</span></div>
+    <div class="part-strip">
+      <div class="part-num">3</div>
+      <div class="part-info">
+        <h2>走进黄鹤楼</h2>
+        <div class="loc">📍 主楼一层 · 二层</div>
+      </div>
+    </div>
+    <div class="audio-bar">
+      <span class="label">🔊 语音</span>
+      <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995df56d2e0eea6f9dc3ef2.mp3"></audio>
+    </div>
+    <button class="text-toggle" onclick="toggle(this)">
+      📖 展开讲解 <span class="chevron">▼</span>
+    </button>
+    <div class="text-content">
+      <div class="text-inner">
+        <p>抬头看——"<strong>藻井</strong>"，十多米高的天花板！正面墙上的巨大"<strong>白云黄鹤</strong>"陶瓷壁画，画的就是仙人骑鹤飞走的那一刻。</p>
+        <div class="hl">
+          两根大柱子上的对联有 <strong>7 米长</strong>：<br><br>
+          <em>"爽气西来，云雾扫开天地憾；<br>大江东去，波涛洗净古今愁。"</em>
+        </div>
+        <p><strong>二楼</strong>摆着唐、宋、元、明、清各个朝代黄鹤楼的模型，每个朝代长得都不一样！</p>
+        <div class="game">数一数有几个不同朝代的模型？每毁一次重建一次，样子不一样，灵魂没变。</div>
+      </div>
     </div>
   </div>
-  <div class="part-body">
-    <p>哇，进来了！Ethan 你先抬头看——头顶上方那个高高的空间叫"<strong>藻井</strong>"，有十多米高。古代的工匠们特别喜欢把天花板做成这种层层叠叠的样子，又好看又气派。</p>
-    <p>正面墙上这幅巨大的画叫"<strong>白云黄鹤</strong>"，是用陶瓷做的壁画。你看，一个仙人骑在黄鹤上飞向天空，下面的人都在仰头看。这画的就是我们刚才讲的那个故事——仙人骑鹤飞走的那一刻。</p>
-    <div class="highlight">
-      旁边两根大柱子上挂着一副超长的对联，有 <strong>7 米长</strong>呢！<br><br>
-      <em>"爽气西来，云雾扫开天地憾；<br>大江东去，波涛洗净古今愁。"</em><br><br>
-      意思是：西边吹来的风把天地间的遗憾都吹散了，东去的长江把古往今来的忧愁都冲走了。
-    </div>
-    <p>上二楼！这里摆着<strong>唐、宋、元、明、清</strong>各个朝代黄鹤楼的模型！你可以看到每个朝代的黄鹤楼长得都不一样。唐朝的像个小亭子，宋朝的变高了一些，到了明清就越来越气派。</p>
-    <div class="interact">Ethan 来数一数，这里一共有几个不同朝代的模型？每毁一次就重建一次，样子还不一样，就像一个人换了好多次衣服但灵魂没变。</div>
-  </div>
-  <div class="audio-player">
-    <span class="play-label">🔊 语音讲解</span>
-    <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995df56d2e0eea6f9dc3ef2.mp3"></audio>
-  </div>
-</div>
 
-<!-- Part 4 -->
-<div class="part" id="part4">
-  <div class="part-header">
-    <div class="part-num">4</div>
-    <div>
-      <h2>一层一个世界，五层看天下</h2>
-      <div class="location">📍 主楼三层 → 五层（登顶）</div>
+  <!-- Part 4 -->
+  <div class="part" id="p4">
+    <div class="scene-placeholder">🌊<span class="label">五层 · 登顶远眺</span></div>
+    <div class="part-strip">
+      <div class="part-num">4</div>
+      <div class="part-info">
+        <h2>一层一个世界，五层看天下</h2>
+        <div class="loc">📍 主楼三层 → 五层（登顶）</div>
+      </div>
+    </div>
+    <div class="audio-bar">
+      <span class="label">🔊 语音</span>
+      <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995e04c1aaffc9df45cc99c.mp3"></audio>
+    </div>
+    <button class="text-toggle" onclick="toggle(this)">
+      📖 展开讲解 <span class="chevron">▼</span>
+    </button>
+    <div class="text-content">
+      <div class="text-inner">
+        <p><strong>三楼</strong>有 13 位唐宋名人画像，<strong>四楼</strong>古色古香像古代书房，<strong>五楼</strong>是最高层！</p>
+        <div class="hl">
+          🌊 <strong>长江</strong>——6000 多公里，我们在江面上方近 90 米（30层楼）！<br><br>
+          🌉 <strong>武汉长江大桥</strong>——1957 年建成，上层汽车下层火车<br><br>
+          🐢 对面<strong>龟山</strong>——龟蛇锁大江，两座山像守护神
+        </div>
+        <div class="game">看看能不能在大桥下层看到火车经过？数一数桥上有多少辆车！</div>
+      </div>
     </div>
   </div>
-  <div class="part-body">
-    <p><strong>三楼</strong>的墙上有 13 位唐宋名人的画像，全是当年来过黄鹤楼并且留下诗词的大诗人。你认识几个？李白、白居易、陆游……他们就像是这座楼的"打卡嘉宾"。</p>
-    <p><strong>四楼</strong>布置得古色古香，像是走进了一个古代的书房，很安静，让人想坐下来写字画画。</p>
-    <p>好，重头戏来了——<strong>五楼</strong>！这是最高层！</p>
-    <div class="highlight">
-      🌊 前面那条巨大的河就是<strong>长江</strong>！中国最长的河，从西藏一直流到上海，<strong>6000 多公里</strong>。我们现在站的位置比江面高了将近 90 米，差不多 <strong>30 层楼</strong>那么高！<br><br>
-      🌉 横跨江面的大桥是<strong>武汉长江大桥</strong>，1957 年建成，长江上第一座公路铁路两用桥。上层走汽车，下层跑火车！<br><br>
-      🐢 对面那座山是<strong>龟山</strong>。龟山对蛇山，龟蛇锁大江——古人觉得这两座山就像两个守护神。
-    </div>
-    <p>1800 年来，无数人站在我们现在站的这个位置，看着同样的长江，写下了流传千古的诗。想一想，连李白都在这里发过呆呢！</p>
-    <div class="interact">看看能不能在长江大桥下层看到火车经过？数一数桥上有多少辆车！</div>
-  </div>
-  <div class="audio-player">
-    <span class="play-label">🔊 语音讲解</span>
-    <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995e04c1aaffc9df45cc99c.mp3"></audio>
-  </div>
-</div>
 
-<!-- Part 5 -->
-<div class="part" id="part5">
-  <div class="part-header">
-    <div class="part-num">5</div>
-    <div>
-      <h2>敲一口大钟，看一个宝贝</h2>
-      <div class="location">📍 千禧钟 · 古铜顶</div>
+  <!-- Part 5 -->
+  <div class="part" id="p5">
+    <div class="scene-placeholder">🔔<span class="label">千禧钟 · 古铜顶</span></div>
+    <div class="part-strip">
+      <div class="part-num">5</div>
+      <div class="part-info">
+        <h2>敲一口大钟，看一个宝贝</h2>
+        <div class="loc">📍 千禧钟 · 古铜顶</div>
+      </div>
+    </div>
+    <div class="audio-bar">
+      <span class="label">🔊 语音</span>
+      <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995e0631aaffc9df45ccb1a.mp3"></audio>
+    </div>
+    <button class="text-toggle" onclick="toggle(this)">
+      📖 展开讲解 <span class="chevron">▼</span>
+    </button>
+    <div class="text-content">
+      <div class="text-inner">
+        <p><strong>千禧钟</strong>——2000 年铸造，重 <strong>20 吨</strong>（≈ 4 头大象）！</p>
+        <div class="game">想好要许什么愿了吗？想好了就去敲！</div>
+        <p>"<strong>古铜顶</strong>"是明朝万历年间的真品，400 多年！楼毁了它却奇迹般留下来。</p>
+        <div class="hl">
+          就像一场大火烧了整栋房子，但屋顶上的那颗星星掉下来没有碎，被人们小心翼翼地保存了几百年。
+        </div>
+      </div>
     </div>
   </div>
-  <div class="part-body">
-    <p>下楼以后，我们来到了<strong>千禧钟</strong>。这口大钟是 2000 年新千年的时候铸造的，重 <strong>20 吨</strong>，差不多相当于 <strong>4 头大象</strong>的重量！你可以花几块钱敲一下。</p>
-    <p>古人相信钟声能传得很远很远，可以把你的心愿送到天上去。</p>
-    <div class="interact">Ethan 想好要许什么愿了吗？想好了就去敲！</div>
-    <p>旁边还有一个宝贝——"<strong>古铜顶</strong>"。这是明朝万历年间铸造的，<strong>400 多年前</strong>的真品！它原来是黄鹤楼楼顶上的装饰，后来楼被毁了，这个铜顶却奇迹般地留了下来。</p>
-    <div class="highlight">
-      就像是一场大火烧了整栋房子，但屋顶上的那颗星星掉下来没有碎，被人们小心翼翼地保存了几百年。
-    </div>
-  </div>
-  <div class="audio-player">
-    <span class="play-label">🔊 语音讲解</span>
-    <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995e0631aaffc9df45ccb1a.mp3"></audio>
-  </div>
-</div>
 
-<!-- Part 6 -->
-<div class="part" id="part6">
-  <div class="part-header">
-    <div class="part-num">6</div>
-    <div>
-      <h2>连李白都认输的那首诗</h2>
-      <div class="location">📍 崔颢题诗图 · 搁笔亭</div>
+  <!-- Part 6 -->
+  <div class="part" id="p6">
+    <div class="scene-placeholder">✍️<span class="label">崔颢题诗 · 搁笔亭</span></div>
+    <div class="part-strip">
+      <div class="part-num">6</div>
+      <div class="part-info">
+        <h2>连李白都认输的那首诗</h2>
+        <div class="loc">📍 崔颢题诗图 · 搁笔亭</div>
+      </div>
+    </div>
+    <div class="audio-bar">
+      <span class="label">🔊 语音</span>
+      <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995e0791aaffc9df45ccc5d.mp3"></audio>
+    </div>
+    <button class="text-toggle" onclick="toggle(this)">
+      📖 展开讲解 <span class="chevron">▼</span>
+    </button>
+    <div class="text-content">
+      <div class="text-inner">
+        <p>"<strong>诗仙</strong>"李白来到黄鹤楼想写诗，看到崔颢的诗后说：</p>
+        <div class="hl">
+          <strong>"眼前有景道不得，崔颢题诗在上头！"</strong><br>
+          意思是：我写不出来了，人家已经写了最好的！
+        </div>
+        <div class="poem">
+          昔人已乘黄鹤去，此地空余黄鹤楼。<br>
+          黄鹤一去不复返，白云千载空悠悠。<br>
+          晴川历历汉阳树，芳草萋萋鹦鹉洲。<br>
+          日暮乡关何处是？烟波江上使人愁。<br>
+          <small style="color:#999">—— 崔颢《黄鹤楼》</small>
+        </div>
+        <p>"<strong>搁笔亭</strong>"——搁笔就是放下笔。纪念李白"认输"的地方。</p>
+        <div class="game">连诗仙都有佩服别人的时候。一起背一遍？"昔人已乘黄鹤去……"</div>
+      </div>
     </div>
   </div>
-  <div class="part-body">
-    <p>Ethan，接下来我要给你讲一个关于"<strong>认输</strong>"的故事。</p>
-    <p>在古代，有一个人被称为"<strong>诗仙</strong>"，就是李白——他是写诗写得最厉害的人，没有之一。但就是这样一个人，有一次来到黄鹤楼，准备挥笔写诗的时候，看到墙上已经有一首诗了。</p>
-    <div class="highlight">
-      他看完之后说了一句特别有名的话：<br>
-      <strong>"眼前有景道不得，崔颢题诗在上头！"</strong><br>
-      意思是：眼前的景色这么美，但我写不出来了，因为崔颢这家伙已经把最好的诗写在这里了！
-    </div>
-    <div class="poem">
-      昔人已乘黄鹤去，此地空余黄鹤楼。<br>
-      黄鹤一去不复返，白云千载空悠悠。<br>
-      晴川历历汉阳树，芳草萋萋鹦鹉洲。<br>
-      日暮乡关何处是？烟波江上使人愁。<br>
-      <small style="color:#999">—— 崔颢《黄鹤楼》</small>
-    </div>
-    <p>你看旁边这个亭子，叫"<strong>搁笔亭</strong>"——"搁笔"就是放下笔不写了。这个亭子就是为了纪念李白在这里"认输"这件事。</p>
-    <div class="interact">连诗仙都有佩服别人的时候。来，我们一起把崔颢的这首诗背一遍？"昔人已乘黄鹤去……"</div>
-  </div>
-  <div class="audio-player">
-    <span class="play-label">🔊 语音讲解</span>
-    <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995e0791aaffc9df45ccc5d.mp3"></audio>
-  </div>
-</div>
 
-<!-- Part 7 -->
-<div class="part" id="part7">
-  <div class="part-header">
-    <div class="part-num">7</div>
-    <div>
-      <h2>两千年的故事，今天有你</h2>
-      <div class="location">📍 毛泽东词亭 · 鹅碑亭 · 南楼</div>
+  <!-- Part 7 -->
+  <div class="part" id="p7">
+    <div class="scene-placeholder">🦢<span class="label">毛泽东词亭 · 鹅碑亭</span></div>
+    <div class="part-strip">
+      <div class="part-num">7</div>
+      <div class="part-info">
+        <h2>两千年的故事，今天有你</h2>
+        <div class="loc">📍 毛泽东词亭 · 鹅碑亭 · 南楼</div>
+      </div>
+    </div>
+    <div class="audio-bar">
+      <span class="label">🔊 语音</span>
+      <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995e08f1aaffc9df45cce09.mp3"></audio>
+    </div>
+    <button class="text-toggle" onclick="toggle(this)">
+      📖 展开讲解 <span class="chevron">▼</span>
+    </button>
+    <div class="text-content">
+      <div class="text-inner">
+        <div class="hl">
+          毛泽东 1927 年写的词：<strong>"把酒酹滔滔，心潮逐浪高。"</strong><br>
+          举着酒杯对着长江水，豪情像浪花翻涌。
+        </div>
+        <p>从三国孙权建楼 → 唐代崔颢李白题诗 → 毛泽东写词，这座楼见证了近 <strong>2000 年</strong>中国历史。你今天也来了！</p>
+        <p>"<strong>鹅碑亭</strong>"——石碑上一个巨大的"鹅"字，传说是书法家王羲之写的。他观察鹅游泳的姿态来练笔法。</p>
+        <div class="game">用手指在空中比划一下"鹅"字！看谁写的更大更潇洒！</div>
+        <div class="hl" style="background:#fff3e0; border-color:#ff9800;">
+          🎉 <strong>黄鹤楼之旅完成！</strong><br>
+          你站在了 1800 年历史的楼上，听了仙人画鹤的故事，看了连李白都认输的那首诗，敲了一口 4 头大象重的大钟。<br><br>
+          <strong>Ethan，你觉得今天最酷的是什么？</strong>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="part-body">
-    <p>快到终点了！这个亭子里刻着毛泽东的一首词<strong>《菩萨蛮·黄鹤楼》</strong>，写于 1927 年。里面有一句特别有名的：</p>
-    <div class="highlight">
-      <strong>"把酒酹滔滔，心潮逐浪高。"</strong><br>
-      就是举着酒杯对着滔滔长江水，心里的豪情像浪花一样翻涌。
-    </div>
-    <p>Ethan，从三国时期的孙权建楼，到唐代崔颢李白题诗，再到毛泽东写词，这座楼见证了将近 <strong>2000 年</strong>的中国历史。你今天也来了，说不定以后你也能写一首关于黄鹤楼的诗呢！</p>
-    <p>最后给你看一个好玩的东西——"<strong>鹅碑亭</strong>"。亭子里有一块大石碑，上面就写了一个巨大的"<strong>鹅</strong>"字。传说这个字是书法家王羲之写的。王羲之就是那个特别喜欢鹅的人，据说他观察鹅游泳的姿态来练习书法的笔法。这个"鹅"字写得又大又潇洒。</p>
-    <div class="interact">用手指在空中比划一下"鹅"字！看谁写的更大、更潇洒！</div>
-    <div class="highlight" style="background:#fff3e0; border-color:#ff9800;">
-      🎉 <strong>恭喜！黄鹤楼之旅完成！</strong><br><br>
-      今天你站在了 1800 年历史的楼上，听了仙人画鹤的故事，看了连李白都认输的那首诗，敲了一口 4 头大象重的大钟。<br><br>
-      <strong>Ethan，你觉得今天最酷的是什么？</strong>
-    </div>
-  </div>
-  <div class="audio-player">
-    <span class="play-label">🔊 语音讲解</span>
-    <audio controls preload="none" src="https://assets.listenhub.ai/listenhub-public-prod/podcast/6995e08f1aaffc9df45cce09.mp3"></audio>
-  </div>
-</div>
 
-<div class="container">
-  <div class="info-bar" style="background:#e3f2fd; border-color:#2196f3;">
+  <div class="tip">
     <strong>🍜 游完之后</strong><br>
-    出东门后可以顺路去<strong>户部巷</strong>吃小吃！热干面、豆皮、汤包都值得一试。
+    出东门后顺路去<strong>户部巷</strong>吃小吃！热干面、豆皮、汤包都值得一试。
   </div>
+
 </div>
 
 <div class="footer">
-  <div class="shrimp">🦐</div>
+  <div class="big">🦐</div>
   <p>讲解 + 制作：小渣的小虾</p>
-  <p style="margin-top:4px; font-size:0.85em;">语音由 ListenHub 生成 · 2026年2月</p>
+  <p style="margin-top:4px; font-size:0.9em;">语音由 ListenHub 生成 · 2026年2月</p>
 </div>
+
+<script>
+function toggle(btn) {
+  btn.classList.toggle('open');
+  const content = btn.nextElementSibling;
+  content.classList.toggle('open');
+  const isOpen = content.classList.contains('open');
+  btn.innerHTML = isOpen
+    ? '📖 收起讲解 <span class="chevron" style="transform:rotate(180deg)">▼</span>'
+    : '📖 展开讲解 <span class="chevron">▼</span>';
+}
+</script>
 
 </body>
 </html>
